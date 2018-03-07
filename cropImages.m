@@ -1,5 +1,7 @@
 function imagesOut = cropImages(imagesIn, referenceImageNumber)
-%GUI pops up that lets you select your area of interest
+%GUI pops up that lets you select your area of interest. Choose reference
+%image number based on which image allows you to see what you want in your
+%reconstruction (such as a precipitate)
 sz = size(imagesIn);
 res = sz(1:2);
 numImages = sz(3);
