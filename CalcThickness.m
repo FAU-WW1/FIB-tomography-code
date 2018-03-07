@@ -31,11 +31,16 @@ DisTra = zeros (numFrames, 1);
 for i = 1:numFrames
     xl = markers(1).coordinates(i,1);
     xr = markers(2).coordinates(i,1);
-    yl = markers(1).coordinates(i,2);
-    yr = markers(2).coordinates(i,2);
-    Limg = sqrt((xr-xl)^2 + (yr-yl)^2);
+    Limg = xr-xl;
     DisTra (i, 1) = Limg;
 end
+figure;plot(DisTra)
+p = polyfit(1:numFrames,DisTra',1);
+
+fitX = 1:numFrames;
+fitY = fitX * p(1) + p(2);
+hold on
+plot(fitX, fitY);
 
 %% calculate delta L 
 % delta L is a matrix with one column. The values in the cells correspond to
