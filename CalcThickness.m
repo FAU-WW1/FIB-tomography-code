@@ -1,36 +1,33 @@
-function [ thickness ] = CalcThickness(angle,nmperpx)
+function [ thickness ] = CalcThickness(markers,angle,nmperpx)
 % Calculates the thickness of each slice depending on the outer tracking
 % marks. The variable angle defines the angle between the two tracking marks.
 % The variable nmperpx defines the nm per px in the image.
 % The resulting Matrix contain the pixel value and the corresponding
 % nm value. The calculations based on 3072 px size image.
 
-%% Load Tracks
-[filename, pathname, ~] = uigetfile( ...
-    {  '*.csv','*.cvs track mark files'}, ...
-    'Pick the tracks to calculate the thickness', ...
-    'MultiSelect', 'on');
-numFiles = length(filename);
-if ~iscell(filename)
-    filename = {filename};
-end
+%% Searches for the 'L' and 'R' Tracking Marks inside the variable markers 
+% and changes the size of the values in markers to Pixel
 
-for tr = 1:numFiles
-    [pathname,name,~] = fileparts(filename{tr});
-    markers(tr).name = name;
-        markers(tr).coordinates = csvread([pathname filename{tr}]); 
-        %change markers unit from Blender unit into the correct pixel size
-        markers(tr).coordinates = markers(tr).coordinates.*3072;
+for i = 1:length(markers)
+    if markers(i).name == 'L' 
+       l = i; 
+    end
+    if markers(i).name == 'R';
+       r = i; 
+    end 
 end
+%change markers unit from Blender unit into the correct pixel size
+markers(l).coordinates = markers(l).coordinates.*3072;
+markers(r).coordinates = markers(r).coordinates.*3072;
  
 %% Matrix which contains the Distance between the tracks
-numFrames = length(markers(1).coordinates(:,1));
+numFrames = length(markers(l).coordinates(:,1));
 %creates a matrix wich contains the Distance between the tracks per image
 DisTra = zeros (numFrames, 1);
 %for loop gives for each image the Distance between the Tracks
 for i = 1:numFrames
-    xl = markers(1).coordinates(i,1);
-    xr = markers(2).coordinates(i,1);
+    xl = markers(l).coordinates(i,1);
+    xr = markers(r).coordinates(i,1);
     Limg = xr-xl;
     DisTra (i, 1) = Limg;
 end
