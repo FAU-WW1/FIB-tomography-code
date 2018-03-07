@@ -21,5 +21,5 @@ for tr = 1:numFiles
     [filepath,name,ext] = fileparts(filename{tr});
     markers(tr).name = name;
     
-    markers(tr).coordinates = csvread([pathname filename{tr}]); %the 1- comes from the conversion of coordinates starting top left (Blender) to bottom right (Matlab)
+    markers(tr).coordinates = csvread([pathname filename{tr}]); 
 end
