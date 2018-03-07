@@ -27,7 +27,7 @@ for tr = 1:numTracks
     shift(tr).coordinates = tracks(tr).coordinates - repmat(initialCoords,numFrames,1);
 end
 % cretate average from individual shift vectors
-avgShift = [0 0];
+avgShift = zeros(numImages,2);
 for tr = 1:numTracks
     avgShift = avgShift + shift(tr).coordinates;
 end
