@@ -11,6 +11,10 @@ referenceImage = imagesIn(:,:,referenceImageNumber);
 img = imshow(referenceImage);
 hold on;
 
+f = figure('Name','uncropped data');
+img = imshow(referenceImage);
+hold on;
+
 rect = getrect(gca);
 r = rectangle('Position',rect,'EdgeColor',[1 1 0],'LineWidth',5);
 pause(3);
@@ -20,6 +24,13 @@ pause(3);
 for i=1:numImages
     imagesOut(:,:,i) = imcrop(imagesIn(:,:,i), rect);
 end
+delete(f);
 
+f = figure;
+hold on
+
+for i=1:numImages
+imshow(imagesOut(:,:,i))
+end
 
 end
