@@ -53,9 +53,9 @@ end
 %% creating shift vectors
 % calculate individual shift vectors for each track
 for nt = 1:numTracks
-    tr = TrackNumber(nt,1);
-    initialCoords = tracks(tr).coordinates(1,:);
-    shift(nt).coordinates = tracks(tr).coordinates - repmat(initialCoords,numFrames,1);
+    tr = TrackNumber(nt
+    initialCoords = tracks(nt).coordinates(1,:);
+    shift(nt).coordinates = tracks(nt).coordinates - repmat(initialCoords,numFrames,1);
 end
 % cretate average from individual shift vectors
 avgShift = zeros(numImages,2);
