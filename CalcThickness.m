@@ -52,7 +52,8 @@ end
 
 %% calculate from deltaL the thickness between the slices
 % the last slice has no thickness.
-% the angle between the outer tracking marks is 60°
+% the angle between the outer tracking marks is stored in the variable
+% anlge
 
 a = deg2rad(angle);
 b = length(deltaL);
