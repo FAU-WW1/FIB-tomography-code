@@ -1,46 +1,37 @@
-%% Große Ziel isosurface und patch funktionieren
-
-%% Größe von ausschnitt
-sz = size(cropSE);
-
-%% Berechnung der Gridvektoren
+%% Calculation of the grid vector
 nmPerPixel = 4;
 sz = size(cropSE);
 % sz = [141 301 153] ([high width ZTiefe])
 % slice thickness in nm
-sliceThick = 9.5757;
+sliceThick = 40;
 
-%Höhe des Stacks
+%hight of the stack
 gv{1} = linspace(0,nmPerPixel*sz(1),sz(1));
-%erschafft einen Vektor der von 0 bis zur Höhe/Breite des Bildes geht. Die
-%Pixelanzahl wird dabei in nm umgerechnet. 
-%Das letzte sz(1) sagt aus wie viele einzelne Punkte der Vektor hat.
-%Raus kommt ein Vektor mit sz(1) Punkten die jeweils eine Zahl in nm
-%beeinhaltet.
-% sz(1) = 141
-
-%Breite
+%creates a vector from 0 up to the Hight / width of the image. 
+%The pixel will be turned into nm. 
+%the last sz(1)gives the number of points of the vector.
+%gv{1} is a vector with sz(1) points.
+%Each point contains a number in nm.
+%width
 gv{2} = linspace(0,nmPerPixel*sz(2),sz(2)); 
-
-%Z Tiefe
+%Z depth
 gv{3} = linspace(0,sliceThick*sz(3),sz(3));
-% rechnet dabei die Dicke der einzelnen Slice mitrein.
 
-%% Zeige ein Histogramm um Schwellenwert zu finden
+%% show Histogramm to find the thresholdvalue
 histogram(single(cropSE(:)),255);
 
-%% mit Meshgrid
+%% Calculate meshgrid and isosurface
 [X,Y,Z] = meshgrid( gv{2}, gv{1},gv{3});
 [F, V] = isosurface(X,Y,Z,cropSE,0.25);
 
-%% mit patch
+%% with patch
 
 pa = patch('Faces', F, 'Vertices', V, 'FaceColor','red');
-%% Versuch aus Matlab
+%% Attempt from the matlab webpage
 [X,Y,Z] = meshgrid( gv{2}, gv{1},gv{3});
 isoF = isosurface(X,Y,Z,cropSE);
 
-%% nur Zeichnen
+%% Just draw the result
 pa10 = patch(isoF);
 isonormals(X,Y,Z,cropSE,pa10)
 pa10.FaceColor = 'none';
