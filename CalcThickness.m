@@ -28,8 +28,10 @@ DisTra = zeros (numFrames, 1);
 for i = 1:numFrames
     xl = markers(l).coordinates(i,1);
     xr = markers(r).coordinates(i,1);
+    %Limg = length between the marks for each image
     Limg = xr-xl;
     DisTra (i, 1) = Limg;
+    
 end
 figure;plot(DisTra)
 p = polyfit(1:numFrames,DisTra',1);
@@ -59,7 +61,7 @@ a = deg2rad(angle);
 b = length(deltaL);
 thickness = zeros(b,2);
 for i = 1:b;
-    zi = tan(a)*deltaL(i,1);
+    zi = deltaL(i,1)/tan(a/2);
     thickness(i,1) = zi;
     thickness(i,2) = zi*nmperpx;
 end
