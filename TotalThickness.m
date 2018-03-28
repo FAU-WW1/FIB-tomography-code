@@ -1,4 +1,4 @@
-function [ tpx, tnm, ts ] = TotalThickness( markers, angle, nmperpx )
+function [ ts, tpx, tnm] = TotalThickness( markers, angle, nmperpx )
 %Calculates the total Thickness of the Image stack
 %% markers = variable with the loaded tracks
 % angle = angle between the outer tracking marks
@@ -55,5 +55,5 @@ tnm = tpx * nmperpx;
 
 %% Thickness per slice
 
-ts = tnm / (lastI-1)
+ts = tnm / (lastI-1);
 end
