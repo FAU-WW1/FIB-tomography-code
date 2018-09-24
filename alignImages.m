@@ -1,16 +1,13 @@
 function imagesOut = alignImages(imagesIn,tracks)
-%aligns images based on the shifts of the tracked markers parsed in
-%'tracks'. The shifts are relative to the first frame. The number of images
-%needs to match the number of coordinates in each track. The coordinates of
-%the track and images start bottom left. If multiple tracks are parsed, the
-%average shift vector for each frame is calculated.
+% aligns images based on the shifts of the tracked markers parsed in
+% 'tracks'. The shifts are relative to the first frame. The number of images
+% needs to match the number of coordinates in each track. The coordinates of
+% the track and images start bottom left. If multiple tracks are parsed, the
+% average shift vector for each frame is calculated.
 
-%track is a struct with track.name and track.coordinates
-
+% track is a struct with track.name and track.coordinates
 
 %% Searches for the 'ML', 'MM and 'MR' Tracking Marks inside the variable tracks
-
-
 for i = 1:length(tracks)
     if tracks(i).name == 'ML' 
        ml = i; 
@@ -24,7 +21,7 @@ for i = 1:length(tracks)
 end
 
 %% create a cell Array called TrackNumber which has the numbers corresponding to the 
-% struct array trecks
+% struct array tracks
 
 numTracks = 1;
     if exist('ml') == 1
